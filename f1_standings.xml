@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<drivers>
+  <driver>
+    <id>1</id>
+    <name>Max Verstappen</name>
+    <team>Red Bull Racing</team>
+    <points>454</points>
+    <nationality>Dutch</nationality>
+  </driver>
+  <driver>
+    <id>2</id>
+    <name>Lewis Hamilton</name>
+    <team>Mercedes</team>
+    <points>300</points>
+    <nationality>British</nationality>
+  </driver>
+  <driver>
+    <id>9</id>
+    <name>teo</name>
+    <team>mercedes</team>
+    <points>200</points>
+    <nationality>Romania</nationality>
+  </driver>
+  <driver>
+    <id>3</id>
+    <name>Lando Norris</name>
+    <team>McLaren</team>
+    <points>150</points>
+    <nationality>British</nationality>
+  </driver>
+</drivers>

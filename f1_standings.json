@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name": "Max Verstappen",
+    "team": "Red Bull Racing",
+    "points": 454,
+    "nationality": "Dutch"
+  },
+  {
+    "id": 2,
+    "name": "Lewis Hamilton",
+    "team": "Mercedes",
+    "points": 300,
+    "nationality": "British"
+  },
+  {
+    "id": 9,
+    "name": "teo",
+    "team": "mercedes",
+    "points": 200,
+    "nationality": "Romania"
+  },
+  {
+    "id": 3,
+    "name": "Lando Norris",
+    "team": "McLaren",
+    "points": 150,
+    "nationality": "British"
+  }
+]

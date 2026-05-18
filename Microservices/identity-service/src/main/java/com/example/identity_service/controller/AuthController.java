@@ -8,12 +8,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/auth/commands")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 public class AuthController {
@@ -52,11 +51,6 @@ public class AuthController {
         return ResponseEntity.status(401).body("Invalid credentials!");
     }
 
-    @GetMapping("/users")
-    public List<User> getAll() {
-        return repository.findAll();
-    }
-
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {
         if (repository.existsById(id)) {
@@ -68,12 +62,10 @@ public class AuthController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> updateUserRole(@PathVariable Long id, @RequestBody Map<String, String> body) {
-        String newRole = body.get("role");
+    public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody Map<String, String> body) {
         Optional<User> userOpt = repository.findById(id);
         if (userOpt.isPresent()) {
             User user = userOpt.get();
-            String oldRole = user.getRole();
             if (body.containsKey("role")) user.setRole(body.get("role"));
             if (body.containsKey("managedTeam")) user.setManagedTeam(body.get("managedTeam"));
             repository.save(user);

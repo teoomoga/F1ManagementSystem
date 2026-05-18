@@ -41,21 +41,29 @@ public class DriverQueryController {
         return repository.findByTeamContainingIgnoreCase(teamName);
     }
 
-    @GetMapping(value = "/export/{format}", produces = "text/html")
-    public String exportStandings(@PathVariable String format) {
+    @GetMapping(value = "/export/{format}")
+    public org.springframework.http.ResponseEntity<String> exportStandings(@PathVariable String format) {
         List<Driver> drivers = repository.findAllByOrderByPointsDesc();
         String result = "";
+        String contentType = "text/plain";
+        String filename = "standings." + format.toLowerCase();
 
         if (format.equalsIgnoreCase("csv")) {
             result = csvService.export(drivers);
+            contentType = "text/csv";
         } else if (format.equalsIgnoreCase("json")) {
             result = jsonService.export(drivers);
+            contentType = "application/json";
         } else if (format.equalsIgnoreCase("xml")) {
             result = xmlExportService.export(drivers);
+            contentType = "application/xml";
         } else {
-            return "Unknown format";
+            return org.springframework.http.ResponseEntity.badRequest().body("Unknown format");
         }
 
-        return "<html><body><pre>" + result + "</pre></body></html>";
+        return org.springframework.http.ResponseEntity.ok()
+                .header(org.springframework.http.HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
+                .header(org.springframework.http.HttpHeaders.CONTENT_TYPE, contentType)
+                .body(result);
     }
 }

@@ -7,9 +7,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class RegisterUserCommandHandler {
+public class RegisterUserCommandHandler implements CommandHandler<RegisterUserCommand, User> {
     private final UserRepository repository;
 
+    @Override
     public User handle(RegisterUserCommand cmd) {
         User user = new User();
         user.setUsername(cmd.getUsername());

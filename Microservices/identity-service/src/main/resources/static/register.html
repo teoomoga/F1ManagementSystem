@@ -1,14 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>F1 - Create Account</title>
     <style>
-        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background: #1a1a1a; color: white; margin: 0; }
-        .register-card { background: #333; padding: 40px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); width: 320px; }
-        h2 { color: #e10600; text-align: center; text-transform: uppercase; margin-bottom: 20px; }
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #1a1a1a;
+            color: white;
+            margin: 0;
+        }
 
-        input, select {
+        .register-card {
+            background: #333;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            width: 320px;
+        }
+
+        h2 {
+            color: #e10600;
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        input,
+        select {
             width: 100%;
             padding: 12px;
             margin: 8px 0;
@@ -38,101 +62,120 @@
             text-transform: uppercase;
         }
 
-        button:hover { background: #b80500; }
+        button:hover {
+            background: #b80500;
+        }
 
-        .footer-link { text-align: center; margin-top: 15px; font-size: 0.9em; }
-        .footer-link a { color: #aaa; text-decoration: none; }
-        .footer-link a:hover { color: #e10600; }
+        .footer-link {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
 
-        #regMsg { text-align: center; margin-top: 10px; font-weight: bold; }
+        .footer-link a {
+            color: #aaa;
+            text-decoration: none;
+        }
+
+        .footer-link a:hover {
+            color: #e10600;
+        }
+
+        #regMsg {
+            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
+        }
     </style>
 </head>
+
 <body>
-<div class="register-card">
-    <h2>Join F1 Team</h2>
+    <div class="register-card">
+        <h2>Join F1 Team</h2>
 
-    <input type="text" id="regUsername" placeholder="Username">
-    <input type="email" id="regEmail" placeholder="Email Address">
-    <input type="password" id="regPassword" placeholder="Password">
+        <input type="text" id="regUsername" placeholder="Username">
+        <input type="email" id="regEmail" placeholder="Email Address">
+        <input type="password" id="regPassword" placeholder="Password">
 
-    <label for="regRole">Select Account Level:</label>
-    <select id="regRole" onchange="toggleTeamSelect()">
-        <option value="GUEST">GUEST (View Only)</option>
-        <option value="TEAM_MANAGER">TEAM MANAGER (Update Info)</option>
-        <option value="ADMIN">ADMIN (Full Control)</option>
-    </select>
-
-    <div id="teamSelectionDiv" style="display: none; margin-top: 15px;">
-        <label for="regTeam">Select Your Team:</label>
-        <select id="regTeam">
-            <option value="Mercedes">Mercedes-AMG Petronas</option>
-            <option value="Red Bull">Red Bull Racing</option>
-            <option value="Ferrari">Scuderia Ferrari</option>
-            <option value="McLaren">McLaren F1 Team</option>
-            <option value="Aston Martin">Aston Martin Cognizant</option>
-            <option value="Alpine">Alpine F1 Team</option>
-            <option value="Williams">Williams Racing</option>
-            <option value="VCARB">Visa Cash App RB</option>
-            <option value="Sauber">Stake F1 Team Sauber</option>
-            <option value="Haas">MoneyGram Haas F1 Team</option>
+        <label for="regRole">Select Account Level:</label>
+        <select id="regRole" onchange="toggleTeamSelect()">
+            <option value="GUEST">GUEST</option>
+            <option value="TEAM_MANAGER">TEAM MANAGER</option>
+            <option value="ADMIN">ADMIN</option>
         </select>
+
+        <div id="teamSelectionDiv" style="display: none; margin-top: 15px;">
+            <label for="regTeam">Select Your Team:</label>
+            <select id="regTeam">
+                <option value="Mercedes">Mercedes</option>
+                <option value="Red Bull Racing">Red Bull Racing</option>
+                <option value="Ferrari">Scuderia Ferrari</option>
+                <option value="McLaren">McLaren</option>
+                <option value="Aston Martin">Aston Martin </option>
+                <option value="Audi">Audi</option>
+                <option value="Williams">Williams</option>
+                <option value="Cadillac">Cadillac</option>
+                <option value="Racing Bulls">Racing Bulls</option>
+                <option value="Haas">MoneyGram Haas F1 Team</option>
+            </select>
+        </div>
+
+        <button onclick="register()">CREATE ACCOUNT</button>
+
+        <div class="footer-link">
+            <a href="login.html">Already have an account? Login</a>
+        </div>
+        <p id="regMsg"></p>
     </div>
 
-    <button onclick="register()">CREATE ACCOUNT</button>
-
-    <div class="footer-link">
-        <a href="login.html">Already have an account? Login</a>
-    </div>
-    <p id="regMsg"></p>
-</div>
-
-<script>
-    function toggleTeamSelect() {
-        const role = document.getElementById('regRole').value;
-        const teamDiv = document.getElementById('teamSelectionDiv');
-        teamDiv.style.display = (role === 'TEAM_MANAGER') ? 'block' : 'none';
-    }
-
-    async function register() {
-        const user = document.getElementById('regUsername').value;
-        const email = document.getElementById('regEmail').value;
-        const pass = document.getElementById('regPassword').value;
-        const role = document.getElementById('regRole').value;
-        const team = (role === 'TEAM_MANAGER') ? document.getElementById('regTeam').value : null;
-
-        if(!user || !email || !pass) {
-            alert("Please fill all fields!");
-            return;
+    <script>
+        function toggleTeamSelect() {
+            const role = document.getElementById('regRole').value;
+            const teamDiv = document.getElementById('teamSelectionDiv');
+            teamDiv.style.display = (role === 'TEAM_MANAGER') ? 'block' : 'none';
         }
 
-        const payload = {
-            username: user,
-            email: email,
-            password: pass,
-            role: role,
-            managedTeam: team
-        };
+        async function register() {
+            const user = document.getElementById('regUsername').value;
+            const email = document.getElementById('regEmail').value;
+            const pass = document.getElementById('regPassword').value;
+            const role = document.getElementById('regRole').value;
+            const team = (role === 'TEAM_MANAGER') ? document.getElementById('regTeam').value : null;
 
-        try {
-            const res = await fetch('http://localhost:8082/api/auth/register', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(payload)
-            });
-
-            if(res.ok) {
-                alert("Account created successfully as " + role + "!");
-                window.location.href = "login.html";
-            } else {
-                const errorData = await res.text();
-                document.getElementById('regMsg').style.color = "#ff4444";
-                document.getElementById('regMsg').innerText = "Error: Username taken or server issue.";
+            if (!user || !email || !pass) {
+                alert("Please fill all fields!");
+                return;
             }
-        } catch (error) {
-            console.error("Fetch error:", error);
-            alert("Server is down! Make sure IdentityService is running on port 8082.");
+
+            const payload = {
+                username: user,
+                email: email,
+                password: pass,
+                role: role,
+                managedTeam: team
+            };
+
+            try {
+                const res = await fetch('http://localhost:8082/api/auth/commands/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (res.ok) {
+                    alert("Account created successfully as " + role + "!");
+                    window.location.href = "login.html";
+                } else {
+                    const errorData = await res.text();
+                    document.getElementById('regMsg').style.color = "#ff4444";
+                    document.getElementById('regMsg').innerText = "Error: Username taken or server issue.";
+                }
+            } catch (error) {
+                console.error("Fetch error:", error);
+                alert("Server is down! Make sure IdentityService is running on port 8082.");
+            }
         }
-    }
-</script>
+    </script>
 </body>
+
 </html>
